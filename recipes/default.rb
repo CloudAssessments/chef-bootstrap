@@ -75,7 +75,7 @@ if node['platform_family'] == "amazon"
   group 'cloud_user' do
     members 'cloud_user'
   end
-  
+
   openssh_server '/etc/ssh/sshd_config' do
     PasswordAuthentication yes
   end
