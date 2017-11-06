@@ -16,7 +16,7 @@ if node['platform_family'] == "debian"
   end
 
   execute 'Install git and wget on Debian' do
-    command 'apt-get install git wget -y'
+    command 'apt-get install git wget ruby -y'
   end
 
   user 'cloud_user' do
@@ -47,7 +47,7 @@ if node['platform_family'] == "rhel"
   end
 
   execute 'Install git and wget on RHEL' do
-    command 'yum install git wget -y'
+    command 'yum install git wget ruby -y'
   end
 
   execute 'add cloud_user to sudoers' do
@@ -61,7 +61,7 @@ if node['platform_family'] == "amazon"
   end
 
   execute 'Install git and wget on Amazon' do
-    command 'yum install git wget -y'
+    command 'yum install git wget ruby -y'
   end
 
   user 'cloud_user' do
