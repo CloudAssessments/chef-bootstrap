@@ -19,6 +19,10 @@ if node['platform_family'] == "debian"
     command 'apt-get install git wget ruby -y'
   end
 
+  execute 'Install Ruby on Debian' do
+    command 'apt-get install ruby -y'
+  end
+
   user 'cloud_user' do
     home '/home/cloud_user'
     manage_home true
