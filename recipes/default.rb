@@ -61,7 +61,8 @@ if node['platform_family'] == "rhel"
     usermod -a -G rvm `whoami`
     if sudo grep -q secure_path /etc/sudoers; then sudo sh -c "echo export rvmsudo_secure_path=1 >> /etc/profile.d/rvm_secure_path.sh" && echo Environment variable installed; fi
     source /etc/profile.d/rvm.sh
-    rvm install 2.2.4
+    rvm install 2.2.
+    echo $'\nsource /etc/profile.d/rvm.sh' > /root/.bashrc
     EOH
   end
 
