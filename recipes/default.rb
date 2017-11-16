@@ -127,9 +127,9 @@ if node['platform_family'] == "amazon"
     members 'cloud_user'
   end
 
-  #openssh_server '/etc/ssh/sshd_config' do
-  #  PasswordAuthentication yes
-  #end
+  openssh_server '/etc/ssh/sshd_config' do
+    PasswordAuthentication yes
+  end
 
   execute 'add cloud_user to sudoers' do
     command '/bin/echo \'cloud_user ALL=(ALL) NOPASSWD: ALL\' >> /etc/sudoers'
