@@ -80,40 +80,14 @@ if node['platform_family'] == "amazon"
     command 'yum install git wget gpg gcc gcc-c++ make -y'
   end
 
-  #bash 'install rvm' do
-  #  code <<-EOH
-  #  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-  #  curl -sSL https://get.rvm.io | sudo bash -s stable
-  #  usermod -a -G rvm `whoami`
-  #  if sudo grep -q secure_path /etc/sudoers; then sudo sh -c "echo export rvmsudo_secure_path=1 >> /etc/profile.d/rvm_secure_path.sh" && echo Environment variable installed; fi
-  #  source /etc/profile.d/rvm.sh
-  #  rvm install 2.2.4
-  #  EOH
-  #end
-
-  #execute 'Install Key' do
-  #  command 'gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3'
-  #end
-
-  #execute 'Install install rvm' do
-  #  command 'curl -sSL https://get.rvm.io | sudo bash -s stable'
-  #end
-
-  #execute 'Add user rvm' do
-  #  command 'usermod -a -G rvm `whoami`'
-  #end
-
-  #execute 'Install install rvm' do
-  #  command 'if sudo grep -q secure_path /etc/sudoers; then sudo sh -c "echo export rvmsudo_secure_path=1 >> /etc/profile.d/rvm_secure_path.sh" && echo Environment variable installed; fi'
-  #end
-
-  #execute 'Source rvm' do
-  #  command 'source /etc/profile.d/rvm.sh'
-  #end
-
-  #execute 'Install ruby 2.2.4' do
-  #  command 'rvm install 2.2.4'
-  #end
+  bash 'install rvm' do
+    code <<-EOH
+    git clone git://github.com/sstephenson/rbenv.git .rbenv
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+    echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+    exec $SHELL
+    EOH
+  end
 
   user 'cloud_user' do
     home '/home/cloud_user'
