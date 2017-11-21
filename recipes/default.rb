@@ -77,15 +77,22 @@ if node['platform_family'] == "amazon"
   end
 
   execute 'Install git and wget on Amazon' do
-    command 'yum install git wget gpg gcc gcc-c++ make -y'
+    command 'yum install git wget openssl-devel readline-devel zlib-devel -y'
   end
 
   bash 'install rvm' do
     code <<-EOH
+    cd ~/
     git clone git://github.com/sstephenson/rbenv.git .rbenv
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
     echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
     exec $SHELL
+    git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+    echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile
+    exec $SHELL
+    source ~/.bash_profile
+    rbenv install 2.4.1
+    rbenv global 2.4.1
     EOH
   end
 
