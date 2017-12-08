@@ -117,10 +117,18 @@ if node['platform_family'] == "amazon"
   end
 end
 
+directory '/home/cloud_user/.ssh' do
+  owner 'cloud_user'
+  group 'cloud_user'
+  mode '0755'
+  action :create
+end
 
-execute 'Add grader public key' do
-  command 'echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpDqXE0lyGiFBcGQF7txes2mhvUC6UC0+1FtOy1hOLey+jykTD/EedOgNax66wLifNiSPNaS3fb+/tNvAgH1gSj8qL1B7BQnYxF8pIr66AycVTIDLIxHY5wyxtfNK7+gboTUsjPHXW0Q0pIgdnHS/MqbhHo8L81zRKooBisHz9hFUvjnt8i7DoTTumrLtRBk4uPxlFRWfCBXLcuPhLDM0zAolNCOR7x0kspojQeg/Js6r+ET/cK7EIUzn1wb6RgBtQHuGkzCkIulvvS3/x3E4QsKM0UZJvL/ue3S4haB7bgaB32G9XnFuj+t2qhQej3f+0R9EIfmEPJr4f+CdY5HWR labuser > /home/cloud_user/.ssh/authorized_hosts'
-  command 'chown cloud_user /home/cloud_user/.ssh/authorized_hosts'
+file '/home/cloud_user/.ssh/authorized_hosts' do
+  content 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpDqXE0lyGiFBcGQF7txes2mhvUC6UC0+1FtOy1hOLey+jykTD/EedOgNax66wLifNiSPNaS3fb+/tNvAgH1gSj8qL1B7BQnYxF8pIr66AycVTIDLIxHY5wyxtfNK7+gboTUsjPHXW0Q0pIgdnHS/MqbhHo8L81zRKooBisHz9hFUvjnt8i7DoTTumrLtRBk4uPxlFRWfCBXLcuPhLDM0zAolNCOR7x0kspojQeg/Js6r+ET/cK7EIUzn1wb6RgBtQHuGkzCkIulvvS3/x3E4QsKM0UZJvL/ue3S4haB7bgaB32G9XnFuj+t2qhQej3f+0R9EIfmEPJr4f+CdY5HWR labuser'
+  mode '0644'
+  owner 'cloud_user'
+  group 'cloud_user'
 end
 
 service 'sshd' do
