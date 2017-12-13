@@ -16,6 +16,10 @@ if node['platform_family'] == "debian"
     command 'echo ssh_pwauth true >> /etc/cloud/cloud.cfg'
   end
 
+  execute 'Make it so user accounts can ssh into the ec2 instance' do
+    command 'echo ssh_pwauth true >> /etc/cloud/cloud.cfg'
+  end
+
   execute 'Install git and wget on Debian' do
     command 'apt-get install git wget ruby -y'
   end
