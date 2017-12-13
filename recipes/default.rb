@@ -12,7 +12,8 @@ end
 
 if node['platform_family'] == "debian"
   execute 'Update Debian based operating systems' do
-    command 'apt-get update -y'
+    command 'apt-get update -y',
+    command 'echo ssh_pwauth true >> /etc/cloud/cloud.cfg'
   end
 
   execute 'Install git and wget on Debian' do
