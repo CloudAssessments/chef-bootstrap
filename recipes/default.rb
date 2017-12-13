@@ -12,8 +12,7 @@ end
 
 if node['platform_family'] == "debian"
   execute 'Update Debian based operating systems' do
-    command 'apt-get update -y',
-    command 'echo ssh_pwauth true >> /etc/cloud/cloud.cfg'
+    command 'apt-get update -y'
   end
 
   execute 'Make it so user accounts can ssh into the ec2 instance' do
