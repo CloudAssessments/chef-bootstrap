@@ -57,7 +57,7 @@ end
 
 if node['platform_family'] == "rhel"
   execute 'Update RHEL based operatings systems' do
-    command 'yum update && yum upgrade -y'
+    command 'yum update -y && yum upgrade -y'
   end
 
   execute 'Install git and wget on RHEL' do
@@ -83,7 +83,7 @@ end
 
 if node['platform_family'] == "amazon"
   execute 'Update Amazon based operatings systems' do
-    command 'yum update && yum upgrade -y'
+    command 'yum update -y && yum upgrade -y'
   end
 
   execute 'Install git and wget on Amazon' do
