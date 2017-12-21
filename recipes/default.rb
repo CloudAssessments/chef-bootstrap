@@ -12,11 +12,17 @@ end
 
 if node['platform_family'] == "debian"
   execute 'Update Debian based operating systems' do
-    command 'apt-get update -y'
+    command 'apt-get update -y && apt-get upgade -y'
   end
 
-  execute 'Make it so user accounts can ssh into the ec2 instance' do
-    command 'echo ssh_pwauth true >> /etc/cloud/cloud.cfg'
+  #execute 'Make it so user accounts can ssh into the ec2 instance' do
+  #  command 'echo ssh_pwauth true >> /etc/cloud/cloud.cfg'
+  #end
+
+  file '/etc/cloud/cloud.cfg' do
+    content ""
+    owner 'root'
+    group 'root'
   end
 
   execute 'Install git and wget on Debian' do
@@ -51,7 +57,7 @@ end
 
 if node['platform_family'] == "rhel"
   execute 'Update RHEL based operatings systems' do
-    command 'yum update -y'
+    command 'yum update && yum upgrade -y'
   end
 
   execute 'Install git and wget on RHEL' do
@@ -77,7 +83,7 @@ end
 
 if node['platform_family'] == "amazon"
   execute 'Update Amazon based operatings systems' do
-    command 'yum update -y'
+    command 'yum update && yum upgrade -y'
   end
 
   execute 'Install git and wget on Amazon' do
